@@ -13,12 +13,11 @@ const createUser = async (user) => {
           user.photoURL = url;
           user.uid = id;
           const authUser = setAuthUser(user);
-          console.log({authUser});
           auth
             .createUser(authUser) //setting up authenticated firebase user
             .then((userRecord) => {
               //setting up user roles
-              auth.setCustomUserClaims(userRecord.uid, { role: 'admin' }).then(()=>{
+              auth.setCustomUserClaims(userRecord.uid, { role: 'user' }).then(()=>{
                 const newUser = setNewUser(user);
                 userCollection
                   .doc(userRecord.uid)
